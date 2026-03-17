@@ -17,4 +17,6 @@ func main() {
 	remainingCards.print()
 
 	fmt.Print(cards.toString())
+
+	cards.saveToFile("cards_content.txt")
 }
