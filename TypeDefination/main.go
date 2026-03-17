@@ -16,7 +16,14 @@ func main() {
 	fmt.Println("Deck2: ")
 	remainingCards.print()
 
-	fmt.Print(cards.toString())
+	fmt.Println()
 
-	cards.saveToFile("cards_content.txt")
+	fmt.Println("Comma Separated Deck: ")
+	fmt.Println(cards.toString())
+
+	fmt.Println()
+
+	fmt.Println("Deck from file: ")
+	fileDeck := cards.readFromFile("cards_content.txt")
+	fmt.Println(fileDeck)
 }
