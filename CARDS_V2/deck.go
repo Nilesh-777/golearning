@@ -1,0 +1,60 @@
+package main
+
+import (
+	"fmt"
+	"math/rand/v2"
+	"os"
+	"strings"
+)
+
+type deck []string
+
+func newDeck() deck {
+	cardSuits := deck{"Spade", "Diamond", "Heart", "Club"}
+	cardNumbers := deck{"Ace", "One", "Two", "Three", "Four"}
+	cards := deck{}
+
+	for _, cardSuit := range cardSuits {
+		for _, cardNumber := range cardNumbers {
+			cards = append(cards, cardSuit+" of "+cardNumber)
+		}
+	}
+
+	return cards
+}
+
+func (d deck) print() {
+	for i, card := range d {
+		fmt.Println(i, card)
+	}
+}
+
+func deal(d deck, handSize int) (deck, deck) {
+	return d[:handSize], d[handSize:]
+}
+
+func (d deck) toString() string {
+	return strings.Join([]string(d), ",")
+}
+
+func (d deck) saveToFile(filename string) error {
+	return os.WriteFile(filename, []byte(d.toString()), 777)
+}
+
+func (d deck) readFromFile(filename string) deck {
+	bs, err := os.ReadFile(filename)
+
+	if err != nil {
+		fmt.Println("Error: ", err)
+		os.Exit(1)
+	}
+
+	return deck(strings.Split(string(bs), ","))
+}
+
+func (d deck) shuffle() {
+	for index := range d {
+		newPos := rand.IntN(len(d))
+		d[index], d[newPos] = d[newPos], d[index]
+	}
+}
