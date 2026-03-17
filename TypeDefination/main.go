@@ -26,4 +26,10 @@ func main() {
 	fmt.Println("Deck from file: ")
 	fileDeck := cards.readFromFile("cards_content.txt")
 	fmt.Println(fileDeck)
+
+	fmt.Println()
+
+	fmt.Println("Shuffled Deck")
+	fileDeck.shuffle()
+	fmt.Println(fileDeck)
 }
